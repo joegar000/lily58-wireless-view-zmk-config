@@ -80,7 +80,7 @@
             // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
             //                     |      |      |      |        |  |       |      |       |       |
 
-            display-name = "Raise";
+            display-name = "Symbols";
             bindings = <
 &trans     &trans     &trans    &trans            &trans             &trans                           &trans  &trans    &trans  &trans  &trans  &trans
 &kp TAB    &kp N1     &kp N2    &kp N3            &kp N4             &kp N5                           &kp N6  &kp N7    &kp N8  &kp N9  &kp N0  &bspc_or_del
@@ -100,6 +100,17 @@
 &kp LSHIFT  &trans        &trans        &trans        &trans        &trans        &trans    &trans  &next_or_prev  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_PP  &kp RSHIFT
                                         &trans        &trans        &trans        &trans    &trans  &trans         &trans      &trans
             >;
+
+            label = "FNs";
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        FNs {
+            if-layers = <1 2>;
+            then-layer = <3>;
         };
     };
 };
