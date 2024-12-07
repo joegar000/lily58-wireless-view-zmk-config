@@ -33,7 +33,7 @@
         Donna_key_emoji: Donna_key_emoji {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LGUI &kp PERIOD>;
+            bindings = <&sk LGUI &kp PERIOD>;
             label = "DONNA_KEY_EMOJI";
         };
     };
