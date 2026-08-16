@@ -27,14 +27,33 @@
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-    };
 
-    macros {
-        Donna_key_emoji: Donna_key_emoji {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&sk LGUI &kp PERIOD>;
-            label = "DONNA_KEY_EMOJI";
+        l_mt: l_mt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "L_MT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <0>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <51 52 53 54 55 56 57 11 22 23 34 35 48 49 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 44 45 46 47 48 49 55 56 57>;
+            hold-trigger-on-release;
+        };
+
+        r_mt: r_mt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "R_MT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <0>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <0 1 2 3 4 12 13 14 15 16 24 25 26 27 28 36 37 38 39 40 50 51 52 53 17 29 41 5 54 55 56 57>;
+            hold-trigger-on-release;
         };
     };
 
@@ -51,81 +70,17 @@
 
             display-name = "Base";
             bindings = <
-&kp ESC    &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                        &kp N6  &kp N7    &kp N8            &kp N9   &kp N0    &kp DELETE
-&kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                         &kp Y   &kp U     &kp I             &kp O    &kp P     &bspc_or_del
-&kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                         &kp H   &kp J     &kp K             &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B   &tog 5       &tog 4   &kp N   &kp M     &kp COMMA         &kp DOT  &kp FSLH  &kp RSHFT
-                           &kp LALT  &kp LGUI  &mo 1   &kp SPACE    &kp RET  &mo 2   &kp RALT  &Donna_key_emoji
+&kp ESC    &kp N1  &kp N2  &kp N3        &kp N4        &kp N5                               &kp N6          &kp N7    &kp N8     &kp N9   &kp N0    &kp DELETE
+&kp TAB    &kp Q   &kp W   &kp E         &kp R         &kp T                                &kp Y           &kp U     &kp I      &kp O    &kp P     &bspc_or_del
+&kp LCTRL  &kp A   &kp S   &kp D         &kp F         &kp G                                &kp H           &kp J     &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z   &kp X   &kp C         &kp V         &kp B          &tog 1       &tog 0   &kp N           &kp M     &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                           &kp CAPSLOCK  &kp LEFT_ALT  &kp LEFT_META  &kp SPACE    &kp RET  &kp RIGHT_META  &kp RALT  &kp RCTRL
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        lower_layer {
-            // ------------------------------------------------------------------------------------------------------------
-            // | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |      |       |       |      |       |       |
-            // |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
-            // |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
-            // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
-            //                     |      |      |      |        |  |       |      |       |       |
-
-            display-name = "Nav";
-            bindings = <
-&trans      &trans  &trans  &trans    &trans    &trans                        &trans    &trans    &trans  &trans     &trans  &trans
-&kp TAB     &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                        &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &bspc_or_del
-&trans      &trans  &trans  &trans    &trans    &trans                        &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
-&kp LSHIFT  &trans  &trans  &trans    &trans    &trans  &trans       &trans   &trans    &trans    &trans  &trans     &trans  &kp RSHIFT
-                            &kp LALT  &kp LGUI  &trans  &kp SPACE    &kp RET  &trans    &kp RALT  &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
-
-        raise_layer {
-            // ------------------------------------------------------------------------------------------------------------
-            // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-            // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-            // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
-            //                     |      |      |      |        |  |       |      |       |       |
-
-            display-name = "Symbols";
-            bindings = <
-&trans     &trans     &trans    &trans            &trans             &trans                           &trans  &trans    &trans  &trans  &trans  &trans
-&kp TAB    &kp N1     &kp N2    &kp N3            &kp N4             &kp N5                           &kp N6  &kp N7    &kp N8  &kp N9  &kp N0  &bspc_or_del
-&kp LCTRL  &kp GRAVE  &kp BSLH  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp EQUAL                        &trans  &trans    &trans  &trans  &trans  &trans
-&kp LSHFT  &trans     &trans    &trans            &trans             &trans     &trans       &trans   &trans  &trans    &trans  &trans  &trans  &kp RSHIFT
-                                &trans            &kp LGUI           &trans     &kp MINUS    &kp RET  &trans  &kp RALT  &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
-
-        tri_layer {
-            bindings = <
-&trans      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &trans         &trans      &trans        &trans        &trans    &bt BT_CLR
-&kp F1      &kp F2        &kp F3        &kp F4        &kp F5        &kp F6                          &kp F7         &kp F8      &kp F9        &kp F10       &kp F11   &kp F12
-&trans      &trans        &trans        &trans        &trans        &trans                          &trans         &trans      &trans        &trans        &trans    &trans
-&kp LSHIFT  &trans        &trans        &trans        &trans        &trans        &trans    &trans  &next_or_prev  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_PP  &kp RSHIFT
-                                        &trans        &trans        &trans        &trans    &trans  &trans         &trans      &trans
-            >;
-
-            label = "FNs";
-        };
-
-        lily_layer_1 {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &kp N7  &kp N8  &kp N9  &kp N0  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &kp N4  &kp N5  &kp N6  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &kp N1  &kp N2  &kp N3  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans
-            >;
-
-            label = "Numpad";
-        };
-
-        lily_layer_2 {
+        fns {
             bindings = <
 &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                    &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans   &trans   &trans
@@ -134,7 +89,55 @@
                         &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans
             >;
 
-            label = "FN Lock";
+            label = "FNs";
+        };
+
+        code {
+            bindings = <
+&trans      &trans         &trans            &trans            &trans         &trans                     &trans  &trans         &trans             &trans             &trans                 &trans
+&kp TAB     &kp Q          &kp W             &kp E             &kp R          &lt 5 T                    &kp Y   &kp U          &kp I              &kp O              &kp P                  &bspc_or_del
+&kp ESCAPE  &l_mt LCTRL A  &l_mt LEFT_ALT S  &l_mt LEFT_GUI D  &l_mt LSHFT F  &kp G                      &kp H   &r_mt RSHFT J  &r_mt RIGHT_GUI K  &r_mt RIGHT_ALT L  &r_mt RCTRL SEMICOLON  &kp SQT
+&trans      &kp Z          &kp X             &kp C             &kp V          &kp B    &trans    &trans  &kp N   &kp M          &kp COMMA          &kp PERIOD         &kp SLASH              &trans
+                                             &trans            &mo 3          &mo 4    &trans    &trans  &mo 4   &mo 3          &trans
+            >;
+
+            label = "Code";
+        };
+
+        lower_layer {
+            bindings = <
+&trans      &trans                &trans                   &trans                   &trans                &trans                          &trans         &trans                 &trans                    &trans                    &trans                &trans
+&kp F1      &kp F2                &kp F3                   &kp F4                   &kp F5                &kp F6                          &kp F7         &kp F8                 &kp F9                    &kp F10                   &kp F11               &kp F12
+&trans      &l_mt LCTRL NUMBER_1  &l_mt LEFT_ALT NUMBER_2  &l_mt LEFT_GUI NUMBER_3  &l_mt LSHFT NUMBER_4  &kp NUMBER_5                    &kp NUMBER_6   &r_mt RSHIFT NUMBER_7  &r_mt RIGHT_GUI NUMBER_8  &r_mt RIGHT_ALT NUMBER_9  &r_mt RCTRL NUMBER_0  &trans
+&bt BT_CLR  &bt BT_SEL 0          &bt BT_SEL 1             &bt BT_SEL 2             &bt BT_SEL 3          &bt BT_SEL 4  &trans    &trans  &next_or_prev  &kp C_MUTE             &kp C_VOL_DN              &kp C_VOL_UP              &kp C_PP              &trans
+                                                           &trans                   &trans                &trans        &trans    &trans  &trans         &trans                 &trans
+            >;
+
+            label = "Nums";
+        };
+
+        raise_layer {
+            bindings = <
+&trans  &trans             &trans               &trans                       &trans                      &trans                          &trans     &trans            &trans              &trans                        &trans             &trans
+&trans  &kp EXCL           &kp AT               &kp LPAR                     &kp RPAR                    &kp PRCNT                       &kp CARET  &kp AMPS          &kp ASTRK           &kp HASH                      &kp DOLLAR         &trans
+&trans  &l_mt LCTRL GRAVE  &l_mt LEFT_ALT PIPE  &l_mt LEFT_GUI LEFT_BRACKET  &l_mt LSHIFT RIGHT_BRACKET  &kp EQUAL                       &kp COLON  &r_mt RSHIFT DQT  &r_mt RIGHT_GUI LT  &r_mt RIGHT_ALT GREATER_THAN  &r_mt RCTRL SLASH  &trans
+&none   &kp TILDE          &kp BACKSLASH        &kp LBRC                     &kp RBRC                    &kp PLUS   &trans       &trans  &kp SEMI   &kp SQT           &kp COMMA           &kp PERIOD                    &kp QMARK          &trans
+                                                &trans                       &trans                      &trans     &kp MINUS    &trans  &trans     &trans            &trans
+            >;
+
+            label = "Symbols";
+        };
+
+        nav {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans  &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans    &trans    &trans  &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans     &trans  &trans
+                        &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans
+            >;
+
+            label = "Nav";
         };
     };
 
@@ -142,8 +145,8 @@
         compatible = "zmk,conditional-layers";
 
         FNs {
-            if-layers = <1 2>;
-            then-layer = <3>;
+            if-layers = <1 1>;
+            then-layer = <1>;
         };
     };
 };
